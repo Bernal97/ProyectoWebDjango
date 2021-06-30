@@ -1,0 +1,69 @@
+<html>
+<head>
+    {% load static %}
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+    <!-- Boostrap -->
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-
+    9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- css de inicio -->
+    <link href = "{% static 'JugueteriaApp/css/style.css' %}" rel = "stylesheet">
+</head>
+<body>
+    <section class = "Encabezado">
+     
+        <div class = " MenuPrincipal">
+            <div class = "btn-toolbar-mb3" role = "toolbar">
+            <div class = "float-right">
+            {% if user.is_authenticated %}
+                <a href = "{% url 'logout' %}"><button type = "submit" class = "btn btn-success">Logout</a>
+                <a href = "{% url 'CarritoCompras'%}"><button type = "submit" class = "btn btn-success"> Carrito </a>
+            {% else %}
+                <a href = "{% url 'Login' %}"><button type = "submit" class = "btn btn-success">Login</a>
+                <a href = "{% url 'Registro'%}"><button type = "submit" class = "btn btn-success">Registro</a>
+                <a href = "{% url 'CarritoCompras'%}"><button type = "submit" class = "btn btn-success"> Carrito </a>
+            {% endif %}
+            </div>
+            </div>
+            <img src = "VergilChair.jpg"
+            width = "150"
+            height = "50"> Jugueteria Jaguarette S.A
+        
+        </div>
+    </section>
+    <section class = "Menu">
+            <div class = "botones">
+            <a href="{% url 'Principal' %}"><button type = "submit" class = "btn btn-success">home</button>
+            </a>
+            <a href="{% url 'categoria' %}"><button type = "submit" class = "btn btn-success"> Categorias </button></a>
+            <a href="{% url 'AcercaDe' %}"><button type = "submit" class = "btn btn-success">AcercaDe </button></a>
+            <a href="{% url 'Contacto'%}"><button type = "submit" class = "btn btn-success"> Contacto </button></a>
+            {% if perms.JugueteriaApp.add_producto %}
+            <a href ="{% url 'agregarproducto'%}"><button type = "submit" class = "btn btn-success">Añadir Producto</button></a>
+            {% endif %}
+            </div>
+            <form method = "GET">                    
+                   <input type = "text"  placeholder= "Buscar ..." name = "Buscar">
+                    <button type = "submit" class = "btn btn-success"> Buscar </button>
+            </form> 
+    </section>
+   {% block content %}
+   {% endblock %}
+
+   <footer>
+        <div class="container">
+		<div class="row">
+			<div class="col-6 copyright mt-3">
+				<span>&copy; 2021 Jaguarete KAA, S.A. <a href="#">Politicas de privacidad</a></span>
+			</div>
+			<div class="col-6 copyright mt-3">
+				<p class="float-right text-muted">Creado por
+					<a href="#" target="_blank"><i>Lautaro Bernal</i> </a>
+				</p>
+			</div>
+		</div>
+	</div>
+  
+   </footer>
+</body>
+</html>

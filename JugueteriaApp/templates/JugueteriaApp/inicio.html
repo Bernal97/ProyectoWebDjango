@@ -1,0 +1,117 @@
+{% extends "JugueteriaApp/base.html" %}
+
+{% load static %}
+{% block content %}
+  <div class="row">
+  <div class="col-sm">
+    <div class="card card-home">
+      <div class="card-body">
+        <div class="row">
+          
+          <div class="col-sm">
+            <div class="card">
+              <img class="card-img-top" src="" alt="Un producto">
+              <div class="card-body">
+                <h4 class="card-title"><a href="" title="Ver Producto">Producto</a></h4>
+                <p class="card-text">Una descripcion</p>
+                <div class="row">
+                  <div class="col">
+                    <p class="btn btn-danger btn-block disabled">17,00 Ars.</p>
+                  </div>
+                  <div class="col">
+                    <a href="#" class="btn btn-success btn-block">Add carrito</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm">
+            <div class="card">
+              <img class="card-img-top" src="" alt="Titulo Producto">
+              <div class="card-body">
+                <h4 class="card-title"><a href="" title="Ver Producto">Un Producto</a></h4>
+                <p class="card-text">Una Descripcion</p>
+                <div class="row">
+                  <div class="col">
+                    <p class="btn btn-danger btn-block disabled">36,45 Ars.</p>
+                  </div>
+                  <div class="col">
+                    <a href="#" class="btn btn-success btn-block">Add carrito</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm">
+            <div class="card">
+              <img class="card-img-top" src="" alt="Titulo Producto">
+              <div class="card-body">
+                <h4 class="card-title"><a href="" title="Ver Producto">Un Producto</a></h4>
+                <p class="card-text">Una Descripcion</p>
+                <div class="row">
+                  <div class="col">
+                    <p class="btn btn-danger btn-block disabled">18,00 Ars.</p>
+                  </div>
+                  <div class="col">
+                    <a href="#" class="btn btn-success btn-block">Add carrito</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class = "container mt-3 mb-5">
+  <div class = "row">
+    <div class = "col-sm">
+      <div class = "card">
+        <div class = "card-header bg-primary text-white text-upercase">
+          <i class = "fa fa-star"></i> Nuevos Productos
+        </div>
+        <div class = "card-body">
+          <div class = "row">
+            <div class = "table responsive">
+              <table class = "table table-hover">
+                <tbody>
+                  {% for p in products %}
+                  <tr>
+                    <td width = "65">
+                      <img src = {{p.imagen.url}} class = "img-xd border">
+                    </td>
+                    <td>
+                      <a href = "#"><p class = "title mb-0"><b>{{p.nombre}}</b></p></a>
+                      <var class "price text-muted">{{p.precio}} Ars.</var>
+                    </td>
+                    <td><b>Categoria</b><br>{{p.descripcion}}</br></td>
+                    <td>
+                        {% if perms.JugueteriaApp.change_producto %}
+                        <a href ="{% url 'modificarproducto' p.id %}"><button> modificar </a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if perms.JugueteriaApp.delete_producto %}
+                        <a href = "{% url 'eliminarproducto' p.id %}"><button> Eliminar </a>
+                        {% endif %}
+                    </td>                  
+                    <td>
+                      <a href = "{% url 'agregarProductoCarro' p.id %}" class = "btn btn-success"> Agregar al Carrito </a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

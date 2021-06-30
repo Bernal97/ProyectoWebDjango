@@ -1,0 +1,18 @@
+{% extends "JugueteriaApp/base.html" %}
+{% block content %}
+
+<div class = "card">
+    <div class = "card-body">
+        <div class = "col-12 col-md-6 offset-md-3">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+            <div class = "d-flex justify-content-center">
+                <input type = "reset" value = "Cancelar">
+                <input type = "submit" value = "Modificar">
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

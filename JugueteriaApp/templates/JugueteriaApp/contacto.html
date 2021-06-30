@@ -1,0 +1,11 @@
+{% extends "JugueteriaApp/base.html"%}
+
+{% load static %}
+{% block content %}
+<div class = "container">
+    <form action = "" method = "POST", style = "text-align: center;">
+    {% csrf_token %}
+    <table style = "color: black; margin: 20px auto;">{{miFormulario.as_table}}</table>
+    <input type = "submit" value = "enviar" style = "width: 100px;">
+</div>
+{% endblock %}

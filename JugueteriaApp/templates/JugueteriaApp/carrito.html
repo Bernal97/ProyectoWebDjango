@@ -1,0 +1,50 @@
+{% extends "JugueteriaApp/base.html" %}
+{% load static %}
+{% block content %}
+
+<table class = "table table-bordered" style = "color: grey;">
+    <thead>
+        <tr>
+        <th colspan = "4" class = "text-center">
+            Carro Compras
+        </th>
+        </tr>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Suma</th>
+            <th> <a href = "{% url 'limpiarProductoCarro' %}" class="btn "><button> Comprar Productos </a></th>
+        </tr>
+
+           
+
+    </thead>
+    <tbody>
+        {% if request.session.carrito.items %}
+            {% for key, value in request.session.carrito.items %}
+                <tr class = "text-center">
+                    <td> {{ value.Nombre }}</td>
+                    <td> {{ value.cantidad }}
+                    
+                        <a href = "{% url 'agregarProductoCarro' value.PRODUCTO_id %}" class = "btn btn-sm btn-success">+</a>
+                        <a href = "{% url 'restarProductoCarro' value.PRODUCTO_id %}" class = "btn btn-sm btn-success">-</a>
+                    </td>
+                    <td> {{ value.precio }} Ars. </td>
+                </tr>
+               
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan = "3">
+                    <div class = "alert alert-danger text-center">
+                        Sin Productos
+                    </div>
+                </td>
+            </tr>
+        {% endif %}   
+    </tbody>
+    
+</table>
+
+
+{% endblock %}
